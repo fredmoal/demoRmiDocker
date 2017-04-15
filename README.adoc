@@ -1,0 +1,34 @@
+Une démo pour le projet Système du 2ème semestre de Master 1 MIAGE
+à l'Université d'Orléans
+
+
+== Utilisation
+
+* Récupérer le projet et lancer un mvn compile pour compiler les sources et déployer les scripts
+
+* Lancer un terminal sh/bash... disposant du client docker
+
+* Faire un cd dans le répertoire target/classes du projet
+
+* Lancer ./runservers.sh
+
+Le script lance 4 conteneurs Docker (image java:8-jre-alpine)
+et lance dans chacun un serveur RMI, qui s'enregistre auprès des autres.
+
+Le premier serveur est lancé seul, puis les autres se connectent entre eux en enregistrant leurs ip.
+
+Pour tester le déploiement des serveurs, lancer le client ./client.sh : il se connecte à un des serveurs
+et demande la liste de tous les serveurs.
+
+
+== References
+
+Mon cours Docker dans l'espace "Infrastructures de Production" sur confluence
+
+La doc de Docker & de RMI
+
+
+== Remarques
+
+Pour simplifier la gestion des ip dynamiques avec Docker, le script nomme les serveurs (serveur1, serveur2, ...)
+et utilise --link pour récupérer l'ip de serveur1 en utilisant son nom (ajouté à /etc/hosts par --link)

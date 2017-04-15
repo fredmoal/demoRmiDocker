@@ -1,0 +1,1 @@
+docker rm -f serveur1 serveur2 serveur3 serveur4
