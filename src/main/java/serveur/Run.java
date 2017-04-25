@@ -16,6 +16,9 @@ import java.util.List;
  * Created by Fred on 14/04/2017.
  */
 public class Run {
+    // no port fixe utilisé pour les appels distants
+    public static final int PORT = 1234;
+
     public static void main(String... args) {
         // récupère mon adresse IP
         String hostAddress = null;
@@ -33,7 +36,7 @@ public class Run {
         RegisterService localService = new RegisterServiceImpl();
         RegisterService stub = null;
         try {
-            stub = (RegisterService) UnicastRemoteObject.exportObject(localService, 0);
+            stub = (RegisterService) UnicastRemoteObject.exportObject(localService, PORT);
             Registry registry = LocateRegistry.getRegistry();
             registry.rebind(RegisterService.serviceName, stub);
             System.out.println("service deployed to "+hostAddress);

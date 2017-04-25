@@ -1,8 +1,8 @@
 # pre-requis :
 # cd dans le répertoire racine des .class (target/classes pour ce projet maven)
 # lance 4 serveurs
-docker run -d -v "$PWD":/run -w /run --name serveur1 java:8-jre-alpine rmiregistry
-docker exec -d serveur1 java -Djava.security.policy=server.policy serveur.Run
+docker run -p 1099:1099 -p 1234:1234 -d -v "$PWD":/run -w /run --name serveur1 java:8-jre-alpine rmiregistry
+docker exec -d serveur1 java -Djava.security.policy=server.policy -Djava.rmi.server.hostname="192.168.99.100" serveur.Run
 docker run -d -v "$PWD":/run -w /run --name serveur2 --link serveur1 java:8-jre-alpine rmiregistry
 docker exec -d serveur2 java -Djava.security.policy=server.policy serveur.Run serveur1
 docker run -d -v "$PWD":/run -w /run --name serveur3 --link serveur1 java:8-jre-alpine rmiregistry
